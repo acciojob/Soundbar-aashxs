@@ -1,25 +1,23 @@
-//your JS code here. If required.
-let audios=document.querySelectorAll("audio")
-let stopp =document.getElementsByClassName("stop")
-let btns=document.querySelectorAll(".btn")
-btns.forEach((value)=>{
-	value.addEventListener("click",()=>{
-		audios.forEach((aud)=>{
-			if(btns.indexof(value)==audios.indexof(aud)){
-				aud.play();
-			}else{
-				for (let index = 0; index < audios.length; index++) {
-					if(btns.indexOf(value)!=audios.indexOf(aud)){
-	                 audios[index].pause();
-					}
-				}
-			}
-		})
-	})
+let audios = Array.from(document.querySelectorAll("audio"));
+let btns = Array.from(document.querySelectorAll(".btn"));
+let stopp = document.getElementsByClassName("stop")[0];
+
+btns.forEach((btn, index) => {
+    btn.addEventListener("click", () => {
+        audios.forEach((aud, audIndex) => {
+            if(index === audIndex) {
+                aud.play();
+            } else {
+                aud.pause();
+                aud.currentTime = 0;
+            }
+        });
+    });
 });
-stopp.addEventListener("click",()=>{
-for (let index = 0; index < audios.length; index++) {
-	audios[index].pause();
-	
-}
-	});
+
+stopp.addEventListener("click", () => {
+    audios.forEach(aud => {
+        aud.pause();
+        aud.currentTime = 0;
+    });
+});
